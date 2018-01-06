@@ -10,17 +10,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+        binding.pry
     "Welcome to Fwitter"
-  end
-
-  helpers do
-    def logged_in?
-      !!current_user
-    end
-
-    def current_user
-      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
-    end
   end
 
   get '/signup' do
@@ -52,7 +43,6 @@ class ApplicationController < Sinatra::Base
   post '/login' do
     @user = User.find_by(:username => params["username"])
     session[:user_id] = @user.id
-    binding.pry
     redirect to '/tweets'
   end
 
@@ -79,4 +69,15 @@ class ApplicationController < Sinatra::Base
       redirect to '/'
     end
   end
+
+  helpers do
+    def logged_in?
+      !!current_user
+    end
+
+    def current_user
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    end
+  end
+
 end
