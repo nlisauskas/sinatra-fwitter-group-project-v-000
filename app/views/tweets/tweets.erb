@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    Welcome, <%= @user.username %>
-  </body>
-</html>
+
+    <h1>Welcome, <%= @user.username %></h1>
+
+    <h2>All Tweets Below:</h2>
+
+    <% Tweet.all.each do |tweet| %>
+    <ul>
+      <li><%= tweet.content %></li>
+    </ul>
+    <% end %>
